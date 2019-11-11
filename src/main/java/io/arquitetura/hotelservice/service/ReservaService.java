@@ -1,10 +1,13 @@
 package io.arquitetura.hotelservice.service;
 
+import io.arquitetura.hotelservice.dto.type.StatusReservaType;
 import io.arquitetura.hotelservice.entity.Reserva;
 import io.arquitetura.hotelservice.repository.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Optional;
 
 @Service
@@ -21,28 +24,24 @@ public class ReservaService {
         return reservaRepository.save(entity);
     }
 
-    public <S extends Reserva> Iterable<S> saveAll(Iterable<S> entities) {
-        return reservaRepository.saveAll(entities);
-    }
+    public Optional<Reserva> findById(Long id) {
+        Optional<Reserva> reserva = reservaRepository.findById(id);
 
-    public Optional<Reserva> findById(Long aLong) {
-        return reservaRepository.findById(aLong);
-    }
+        if(reserva.isPresent()){
+            reserva.get().setStatus(getStatusReserva(reserva.get()));
+        }
 
-    public boolean existsById(Long aLong) {
-        return reservaRepository.existsById(aLong);
+        return reserva;
     }
 
     public Iterable<Reserva> findAll() {
-        return reservaRepository.findAll();
-    }
+        Iterable<Reserva> reservas = reservaRepository.findAll();
 
-    public Iterable<Reserva> findAllById(Iterable<Long> longs) {
-        return reservaRepository.findAllById(longs);
-    }
+        reservas.forEach(reserva -> {
+            reserva.setStatus(getStatusReserva(reserva));
+        });
 
-    public long count() {
-        return reservaRepository.count();
+        return reservas;
     }
 
     public void deleteById(Long aLong) {
@@ -53,11 +52,19 @@ public class ReservaService {
         reservaRepository.delete(entity);
     }
 
-    public void deleteAll(Iterable<? extends Reserva> entities) {
-        reservaRepository.deleteAll(entities);
-    }
-
-    public void deleteAll() {
-        reservaRepository.deleteAll();
+    private String getStatusReserva(Reserva reserva){
+        if(reserva.getDataFim().before(Timestamp.from(Instant.now()))){
+            if(reserva.isPagamentoRealizado()){
+                return StatusReservaType.PAGAMENTO_REALIZADO.name();
+            } else {
+                return StatusReservaType.PAGAMENTO_PENDENTE.name();
+            }
+        } else {
+            if(reserva.isPagamentoRealizado()){
+                return StatusReservaType.FINALIZADA.name();
+            } else {
+                return StatusReservaType.PAGAMENTO_ATRASADO.name();
+            }
+        }
     }
 }

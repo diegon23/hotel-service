@@ -42,6 +42,10 @@ public class Reserva {
     @Column(name = "data_fim", nullable = false)
     private Timestamp dataFim;
 
+    @JsonProperty("pagamento_realizado")
+    @Column(name = "pagamento_realizado", nullable = false)
+    private boolean pagamentoRealizado;
+
     private String status;
 
     public Long getId() {
@@ -90,6 +94,14 @@ public class Reserva {
 
     public void setDataFim(Timestamp dataFim) {
         this.dataFim = dataFim;
+    }
+
+    public boolean isPagamentoRealizado() {
+        return pagamentoRealizado;
+    }
+
+    public void setPagamentoRealizado(boolean pagamentoRealizado) {
+        this.pagamentoRealizado = pagamentoRealizado;
     }
 
     public String getStatus() {

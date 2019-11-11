@@ -20,8 +20,6 @@ public class Quarto {
 
     private Long numero;
 
-    private String status;
-
     @JsonProperty("valor_diaria")
     @Column(name="valor_diaria")
     private BigDecimal valorDiaria;
@@ -40,14 +38,6 @@ public class Quarto {
 
     public void setNumero(Long numero) {
         this.numero = numero;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public BigDecimal getValorDiaria() {

@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS clientes(
 CREATE TABLE IF NOT EXISTS quartos(
 	ID BIGINT PRIMARY KEY AUTO_INCREMENT,
 	numero bigint,
-	status varchar(30),
 	valor_diaria bigint
 );
 
@@ -22,6 +21,7 @@ CREATE TABLE IF NOT EXISTS reservas(
     dt_inicio TIMESTAMP,
     dt_fim TIMESTAMP,
 	status varchar(30),
+	pagamento_realizado boolean,
 	foreign key (id_cliente) references clientes(id),
 	foreign key (id_quarto) references quartos(id)
 );
