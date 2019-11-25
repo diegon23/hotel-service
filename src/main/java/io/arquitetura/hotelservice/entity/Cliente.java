@@ -15,12 +15,9 @@ import java.sql.Timestamp;
 @Table(name="clientes")
 public class Cliente {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
-
     private String nome;
 
+    @Id
     private String cpf;
 
     private String email;
@@ -37,13 +34,7 @@ public class Cliente {
 
     private String telefone;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private boolean ativo;
 
     public String getNome() {
         return nome;
@@ -91,5 +82,13 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }

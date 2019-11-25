@@ -6,7 +6,7 @@ public class CreateReservaDTO {
 
     private Long idQuarto;
 
-    private Long idCliente;
+    private String idCliente;
 
     private LocalDate dtInicio;
 
@@ -20,11 +20,11 @@ public class CreateReservaDTO {
         this.idQuarto = idQuarto;
     }
 
-    public Long getIdCliente() {
+    public String getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Long idCliente) {
+    public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
 

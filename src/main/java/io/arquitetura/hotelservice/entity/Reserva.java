@@ -22,7 +22,7 @@ public class Reserva {
 
     @JsonProperty("id_cliente")
     @Column(name = "id_cliente", nullable = false)
-    private Long idCliente;
+    private String idCliente;
 
     @JsonProperty("id_quarto")
     @Column(name = "id_quarto", nullable = false)
@@ -46,7 +46,13 @@ public class Reserva {
     @Column(name = "pagamento_realizado", nullable = false)
     private boolean pagamentoRealizado;
 
+    @JsonProperty("pagamento_estornado")
+    @Column(name = "pagamento_estornado", nullable = false)
+    private boolean pagamentoEstornado;
+
     private String status;
+
+    private String transacao;
 
     public Long getId() {
         return id;
@@ -56,11 +62,11 @@ public class Reserva {
         this.id = id;
     }
 
-    public Long getIdCliente() {
+    public String getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Long idCliente) {
+    public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -110,6 +116,22 @@ public class Reserva {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public boolean isPagamentoEstornado() {
+        return pagamentoEstornado;
+    }
+
+    public void setPagamentoEstornado(boolean pagamentoEstornado) {
+        this.pagamentoEstornado = pagamentoEstornado;
+    }
+
+    public String getTransacao() {
+        return transacao;
+    }
+
+    public void setTransacao(String transacao) {
+        this.transacao = transacao;
     }
 }
 

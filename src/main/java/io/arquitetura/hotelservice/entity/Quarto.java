@@ -24,6 +24,8 @@ public class Quarto {
     @Column(name="valor_diaria")
     private BigDecimal valorDiaria;
 
+    private String modelo;
+
     public Long getId() {
         return id;
     }
@@ -46,5 +48,13 @@ public class Quarto {
 
     public void setValorDiaria(BigDecimal valorDiaria) {
         this.valorDiaria = valorDiaria;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 }

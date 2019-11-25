@@ -1,11 +1,15 @@
 package io.arquitetura.hotelservice.service;
 
 import io.arquitetura.hotelservice.entity.Cliente;
+import io.arquitetura.hotelservice.entity.Quarto;
 import io.arquitetura.hotelservice.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
@@ -25,39 +29,22 @@ public class ClienteService {
         return clienteRepository.saveAll(entities);
     }
 
-    public Optional<Cliente> findById(Long aLong) {
-        return clienteRepository.findById(aLong);
+    public Optional<Cliente> findById(String s) {
+        return clienteRepository.findById(s);
     }
 
-    public boolean existsById(Long aLong) {
-        return clienteRepository.existsById(aLong);
+    public List<Cliente> findAll() {
+        List<Cliente> clientes = new ArrayList<>();
+        clienteRepository.findAll().forEach(clientes::add);
+
+        return clientes;
     }
 
-    public Iterable<Cliente> findAll() {
-        return clienteRepository.findAll();
-    }
-
-    public Iterable<Cliente> findAllById(Iterable<Long> longs) {
-        return clienteRepository.findAllById(longs);
-    }
-
-    public long count() {
-        return clienteRepository.count();
-    }
-
-    public void deleteById(Long aLong) {
-        clienteRepository.deleteById(aLong);
+    public void deleteById(String s) {
+        clienteRepository.deleteById(s);
     }
 
     public void delete(Cliente entity) {
         clienteRepository.delete(entity);
-    }
-
-    public void deleteAll(Iterable<? extends Cliente> entities) {
-        clienteRepository.deleteAll(entities);
-    }
-
-    public void deleteAll() {
-        clienteRepository.deleteAll();
     }
 }

@@ -62,12 +62,22 @@ public class ImportacaoClientesService {
                 Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
 
                 Cliente cliente = new Cliente();
-                cliente.setNome(line.get(0));
+                cliente.setNome(
+                        line.get(0).replaceAll(
+                                String.format("%s|%s|%s",
+                                        "(?<=[A-Z])(?=[A-Z][a-z])",
+                                        "(?<=[^A-Z])(?=[A-Z])",
+                                        "(?<=[A-Za-z])(?=[^A-Za-z])"
+                                ),
+                                " "
+                        )
+                );
                 cliente.setDtNascimento(timestamp);
                 cliente.setCpf(line.get(2));
                 cliente.setTelefone(line.get(3));
                 cliente.setEmail(line.get(4));
                 cliente.setDtCadastro(new Timestamp(System.currentTimeMillis()));
+                cliente.setAtivo(true);
                 clientes.add(cliente);
             }
         }
