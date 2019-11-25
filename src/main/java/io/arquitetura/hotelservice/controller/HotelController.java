@@ -14,6 +14,7 @@ import io.arquitetura.hotelservice.service.ReservaService;
 import io.arquitetura.hotelservice.dto.Session;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -91,6 +92,21 @@ public class HotelController {
     @GetMapping(value = "/consultar-reservas")
     public Iterable<Reserva> consultarReservas() throws Exception {
         return reservaService.findAll();
+    }
+
+    @DeleteMapping(value = "/limpar-reservas")
+    public void limparReservas() throws Exception {
+        reservaService.findAll().forEach(reserva -> reservaService.deleteById(reserva.getId()));
+    }
+
+    @DeleteMapping(value = "/limpar-quartos")
+    public void limparQuartos() throws Exception {
+        quartoService.findAll().forEach(quarto -> quartoService.deleteById(quarto.getId()));
+    }
+
+    @DeleteMapping(value = "/limpar-clientes")
+    public void limparClientes() throws Exception {
+        clienteService.findAll().forEach(cliente -> clienteService.deleteById(cliente.getCpf()));
     }
 
     @PostMapping(value = "/salvar-reserva")

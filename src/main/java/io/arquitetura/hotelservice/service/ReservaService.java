@@ -23,6 +23,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservaService {
@@ -103,6 +104,8 @@ public class ReservaService {
                         .findAny();
 
                  if(reservaOptional.isPresent()){
+
+
                      throw new Exception("O quarto não está disponível nos dias selecionados!");
                  }
             }
